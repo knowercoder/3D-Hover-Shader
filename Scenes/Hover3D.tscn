@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://csg0n6d7u0rvf"]
+
+[ext_resource type="Material" uid="uid://qogifiicrfc7" path="res://Shaders/Hover3D_1.tres" id="1_mew1f"]
+[ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard2.png" id="2_ggyid"]
+[ext_resource type="Script" path="res://Scripts/Hover3D.gd" id="3_6glk5"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("1_mew1f")
+offset_left = 333.0
+offset_top = 71.0
+offset_right = 833.0
+offset_bottom = 571.0
+texture = ExtResource("2_ggyid")
+script = ExtResource("3_6glk5")
+
+[connection signal="mouse_entered" from="TextureRect" to="TextureRect" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect" to="TextureRect" method="_on_mouse_exited"]
