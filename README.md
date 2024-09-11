@@ -12,4 +12,4 @@ Shader Properties:
 - Resolution - Here you should set the resolution of the texture used
 - Mouse - This is the mouse position that will be set via GDScript attached to the canvas item
 
-It is recommended to use a texture with some transparent areas at the four corners so that the image is not clipped when tilted.
+It is recommended to use a texture with some transparent space at the borders so that the image is not clipped when tilted.
