@@ -1,16 +1,14 @@
 shader_type canvas_item;
 
-// Pass the texture coordinates to the fragment shader
 varying vec2 texCoord;
 varying float fragPerspective;
-varying vec3 transformedNormal;
 varying vec2 mouseoffset;
 
 uniform float _tilt_Scale = 0.5;
 uniform bool _isSpecularLight = false;
 uniform float _speularLightIntensity = 0.5;
 uniform float _speularLightPower = 2.0;
-uniform vec2 _resolution;// Screen resolution
+uniform vec2 _resolution;// texture resolution
 uniform vec2 _mouse;
 
 void vertex() {
@@ -49,9 +47,6 @@ void vertex() {
 
     // Apply the rotation to the vertex position
     vec3 transformedCoord = rotation * vec3(centeredCoord, 0.0);
-	
-	// Pass the transformed normal to the fragment shader
-    transformedNormal = rotation * vec3(0.0, 0.0, 1.0);
 
     // Apply perspective projection
     float perspective = 1.0 / (1.0 - transformedCoord.z * 0.5);
