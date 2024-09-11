@@ -1,19 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://csg0n6d7u0rvf"]
+[gd_scene load_steps=6 format=3 uid="uid://csg0n6d7u0rvf"]
 
 [ext_resource type="Material" uid="uid://qogifiicrfc7" path="res://Shaders/Hover3D_1.tres" id="1_mew1f"]
-[ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard.png" id="2_ggyid"]
+[ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard_500x500.png" id="2_ggyid"]
+[ext_resource type="Texture2D" uid="uid://cmd4us3v3mj73" path="res://Sprites/BirthdayCard_250x200.png" id="2_ghvjy"]
 [ext_resource type="Script" path="res://Scripts/Hover3D.gd" id="3_6glk5"]
+[ext_resource type="Material" uid="uid://bh2i1yoj5octm" path="res://Shaders/Hover3D_2.tres" id="4_vky5w"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = ExtResource("1_mew1f")
-offset_left = 333.0
-offset_top = 71.0
-offset_right = 833.0
-offset_bottom = 571.0
+offset_left = 202.0
+offset_top = 64.0
+offset_right = 702.0
+offset_bottom = 564.0
 texture = ExtResource("2_ggyid")
+script = ExtResource("3_6glk5")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = ExtResource("4_vky5w")
+offset_left = 680.0
+offset_top = 222.0
+offset_right = 930.0
+offset_bottom = 422.0
+texture = ExtResource("2_ghvjy")
 script = ExtResource("3_6glk5")
 
 [connection signal="mouse_entered" from="TextureRect" to="TextureRect" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect" to="TextureRect" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect2" to="TextureRect2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect2" to="TextureRect2" method="_on_mouse_exited"]

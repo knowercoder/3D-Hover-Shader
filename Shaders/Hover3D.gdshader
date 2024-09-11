@@ -1,23 +1,22 @@
 shader_type canvas_item;
 
+uniform float _tilt_Scale = 0.5;
+uniform bool _isSpecularLight = false;
+uniform float _speularLightIntensity = 0.5;
+uniform float _speularLightPower = 3.0;
+uniform vec2 _mousePos;
+
 varying vec2 texCoord;
 varying float fragPerspective;
 varying vec2 mouseoffset;
 
-uniform float _tilt_Scale = 0.5;
-uniform bool _isSpecularLight = false;
-uniform float _speularLightIntensity = 0.5;
-uniform float _speularLightPower = 2.0;
-uniform vec2 _resolution;// texture resolution
-uniform vec2 _mouse;
-
 void vertex() {
     // Normalize texture coordinates
-    texCoord = VERTEX.xy / _resolution;
+    texCoord = VERTEX.xy * TEXTURE_PIXEL_SIZE;
 
     // Center the coordinates around the origin
     vec2 centeredCoord = texCoord - vec2(0.5, 0.5);
-	vec2 mouse_centered = (_mouse / _resolution) * 2.0 - 1.0;
+	vec2 mouse_centered = (_mousePos * TEXTURE_PIXEL_SIZE) * 2.0 - 1.0;
 	mouseoffset = mouse_centered / 2.0;
 
     // Rotation matrices around the x, y, and z axes	
@@ -57,10 +56,11 @@ void vertex() {
 	
     // Transform back to screen coordinates
     vec2 screenPosition = transformedCoord.xy + vec2(0.5, 0.5);	
-    VERTEX = screenPosition * _resolution;	    
+    VERTEX = screenPosition / TEXTURE_PIXEL_SIZE;	    
 }
 
 void fragment() {
+	//perspective correction of UV
     vec2 finalTexCoord = texCoord / fragPerspective;	
     vec4 texColor = texture(TEXTURE, finalTexCoord);	    
 	
