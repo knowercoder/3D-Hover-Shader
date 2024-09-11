@@ -9,7 +9,6 @@ Shader Properties:
 - Is Specular Light - Enable/disable specular highlight
 - Specular Light Intensity - specular highlight strength
 - Specular Light Power - controls the spread of specular highlight
-- Resolution - Here you should set the resolution of the texture used
-- Mouse - This is the mouse position that will be set via GDScript attached to the canvas item
+- Mouse - This is the mouse position that will be set via GDScript attached to the canvas item. Initially set the default value to half the texture resolution.
 
 It is recommended to use a texture with some transparent space at the borders so that the image is not clipped when tilted.
