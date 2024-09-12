@@ -1,30 +1,30 @@
 [gd_scene load_steps=6 format=3 uid="uid://csg0n6d7u0rvf"]
 
-[ext_resource type="Material" uid="uid://qogifiicrfc7" path="res://Shaders/Hover3D_1.tres" id="1_mew1f"]
-[ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard_500x500.png" id="2_ggyid"]
-[ext_resource type="Texture2D" uid="uid://cmd4us3v3mj73" path="res://Sprites/BirthdayCard_250x200.png" id="2_ghvjy"]
-[ext_resource type="Script" path="res://Scripts/Hover3D.gd" id="3_6glk5"]
-[ext_resource type="Material" uid="uid://bh2i1yoj5octm" path="res://Shaders/Hover3D_2.tres" id="4_vky5w"]
+[ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard_500x500.png" id="1_5o2q8"]
+[ext_resource type="Material" uid="uid://h3h86yy12dsj" path="res://Shaders/Hover3D_1.tres" id="1_ing62"]
+[ext_resource type="Script" path="res://Scripts/Hover3D.gd" id="2_a3wo0"]
+[ext_resource type="Material" uid="uid://bh2i1yoj5octm" path="res://Shaders/Hover3D_2.tres" id="4_h5ghc"]
+[ext_resource type="Texture2D" uid="uid://cmd4us3v3mj73" path="res://Sprites/BirthdayCard_250x200.png" id="5_iw7s8"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-material = ExtResource("1_mew1f")
-offset_left = 202.0
-offset_top = 64.0
-offset_right = 702.0
-offset_bottom = 564.0
-texture = ExtResource("2_ggyid")
-script = ExtResource("3_6glk5")
+material = ExtResource("1_ing62")
+offset_left = 174.0
+offset_top = 61.0
+offset_right = 674.0
+offset_bottom = 561.0
+texture = ExtResource("1_5o2q8")
+script = ExtResource("2_a3wo0")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-material = ExtResource("4_vky5w")
-offset_left = 680.0
+material = ExtResource("4_h5ghc")
+offset_left = 739.0
 offset_top = 222.0
-offset_right = 930.0
+offset_right = 989.0
 offset_bottom = 422.0
-texture = ExtResource("2_ghvjy")
-script = ExtResource("3_6glk5")
+texture = ExtResource("5_iw7s8")
+script = ExtResource("2_a3wo0")
 
 [connection signal="mouse_entered" from="TextureRect" to="TextureRect" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect" to="TextureRect" method="_on_mouse_exited"]
