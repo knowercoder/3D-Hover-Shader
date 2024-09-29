@@ -8,4 +8,4 @@ shader_parameter/_tilt_Scale = 0.2
 shader_parameter/_isSpecularLight = true
 shader_parameter/_speularLightIntensity = 0.5
 shader_parameter/_speularLightPower = 5.0
-shader_parameter/_mousePos = Vector2(125, 100)
+shader_parameter/_mousePos = Vector2(0, 0)

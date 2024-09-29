@@ -8,14 +8,12 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion and is_mouse_inside:
 		var mouse_position = event.position
-		var relaytive_mouse_position = mouse_position - position
-		material.set_shader_parameter("_mousePos", relaytive_mouse_position / scale)
-
-
+		var relative_mouse_position = mouse_position - position
+		material.set_shader_parameter("_mousePos", relative_mouse_position/scale - size/2.0)
 
 func _on_mouse_entered():
 	is_mouse_inside = true
 
 func _on_mouse_exited():
 	is_mouse_inside = false
-	material.set_shader_parameter("_mousePos", size/2.0 )
+	material.set_shader_parameter("_mousePos", 0.0 )
