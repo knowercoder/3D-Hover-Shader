@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bh2i1yoj5octm"]
 
-[ext_resource type="Shader" path="res://Shaders/Hover3D.gdshader" id="1_gtxdh"]
+[ext_resource type="Shader" uid="uid://o22b6o4dqekk" path="res://Shaders/Hover3D.gdshader" id="1_gtxdh"]
 
 [resource]
 shader = ExtResource("1_gtxdh")

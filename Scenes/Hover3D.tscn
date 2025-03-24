@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://csg0n6d7u0rvf"]
 
 [ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard_500x500.png" id="1_5o2q8"]
-[ext_resource type="Material" uid="uid://h3h86yy12dsj" path="res://Shaders/Hover3D_1.tres" id="1_ing62"]
-[ext_resource type="Script" path="res://Scripts/Hover3D.gd" id="2_a3wo0"]
-[ext_resource type="Material" uid="uid://bh2i1yoj5octm" path="res://Shaders/Hover3D_2.tres" id="4_h5ghc"]
+[ext_resource type="Material" uid="uid://h3h86yy12dsj" path="res://Shaders/Hover3D_Material1.tres" id="1_ing62"]
+[ext_resource type="Script" uid="uid://0sj48v4o0iyw" path="res://Scripts/Hover3D.gd" id="2_a3wo0"]
+[ext_resource type="Material" uid="uid://bh2i1yoj5octm" path="res://Shaders/Hover3D_Material2.tres" id="4_h5ghc"]
 [ext_resource type="Texture2D" uid="uid://cmd4us3v3mj73" path="res://Sprites/BirthdayCard_250x200.png" id="5_iw7s8"]
 
 [node name="Node2D" type="Node2D"]
