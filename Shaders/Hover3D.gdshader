@@ -6,18 +6,18 @@ uniform float _speularLightIntensity = 0.5;
 uniform float _speularLightPower = 3.0;
 uniform vec2 _mousePos;
 
-varying vec2 texCoord;
-varying float fragPerspective;
-varying vec2 mouseoffset;
+varying vec2 vTexCoord;
+varying float vFragPerspective;
+varying vec2 vMouseoffset;
 
 void vertex() {
     // Normalize texture coordinates
-    texCoord = VERTEX.xy * TEXTURE_PIXEL_SIZE;
+    vTexCoord = VERTEX.xy * TEXTURE_PIXEL_SIZE;
 
     // Center the coordinates around the origin
-    vec2 centeredCoord = texCoord - vec2(0.5, 0.5);
+    vec2 centeredCoord = vTexCoord - vec2(0.5, 0.5);
 	vec2 mouse_centered = ((_mousePos + 0.5/TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE) * 2.0 - 1.0;
-	mouseoffset = mouse_centered / 2.0;
+	vMouseoffset = mouse_centered / 2.0;
 
     // Rotation matrices around the x, y, and z axes	
     float cosX = cos(mouse_centered.y * _tilt_Scale);
@@ -49,10 +49,9 @@ void vertex() {
 
     // Apply perspective projection
     float perspective = 1.0 / (1.0 - transformedCoord.z * 0.5);
-	float perspective2 = 1.0 / (transformedCoord.z * 0.5);
     transformedCoord.xy *= perspective;		
-	texCoord *= perspective;
-	fragPerspective = perspective;
+	vTexCoord *= perspective;
+	vFragPerspective = perspective;
 	
     // Transform back to screen coordinates
     vec2 screenPosition = transformedCoord.xy + vec2(0.5, 0.5);	
@@ -61,11 +60,11 @@ void vertex() {
 
 void fragment() {
 	//perspective correction of UV
-    vec2 finalTexCoord = texCoord / fragPerspective;	
+    vec2 finalTexCoord = vTexCoord / vFragPerspective;	
     vec4 texColor = texture(TEXTURE, finalTexCoord);	    
 	
 	//sepcular light
-	float colvalue = pow(clamp(1.0 - length(finalTexCoord - 0.5 + mouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;
+	float colvalue = pow(clamp(1.0 - length(finalTexCoord - 0.5 + vMouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;
 	vec3 specularCol = vec3(colvalue, colvalue, colvalue);
     
 	if(_isSpecularLight)   
