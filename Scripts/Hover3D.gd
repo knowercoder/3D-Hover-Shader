@@ -16,4 +16,4 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	is_mouse_inside = false
-	material.set_shader_parameter("_mousePos", 0.0 )
+	material.set_shader_parameter("_mousePos", 0.0)

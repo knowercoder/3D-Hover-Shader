@@ -17,9 +17,12 @@ void vertex() {
     // Center the coordinates around the origin
     vec2 centeredCoord = vTexCoord - vec2(0.5, 0.5);
 	vec2 mouse_centered = ((_mousePos + 0.5/TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE) * 2.0 - 1.0;
-	vMouseoffset = mouse_centered / 2.0;
 
-    // Rotation matrices around the x, y, and z axes	
+	vMouseoffset = mouse_centered / 2.0; // varying to be passed to fragment
+
+    // Rotation matrices around the X, Y, and Z axes
+
+	//Rotation along X-axis
     float cosX = cos(mouse_centered.y * _tilt_Scale);
     float sinX = sin(mouse_centered.y * _tilt_Scale);
     mat3 rotationX;
@@ -27,6 +30,7 @@ void vertex() {
     rotationX[1] = vec3(0.0, cosX, -sinX);
     rotationX[2] = vec3(0.0, sinX, cosX);
 
+	//Rotation along Y-axis
     float cosY = cos(-mouse_centered.x * _tilt_Scale);
     float sinY = sin(-mouse_centered.x * _tilt_Scale);
     mat3 rotationY;
@@ -34,6 +38,8 @@ void vertex() {
     rotationY[1] = vec3(0.0, 1.0, 0.0);
     rotationY[2] = vec3(-sinY, 0.0, cosY);
 
+	//Rotation along Z-axis
+	//no rotation along Z-axis, so the angle is zero
     float cosZ = cos(0.);
     float sinZ = sin(0.);
     mat3 rotationZ;
@@ -49,25 +55,25 @@ void vertex() {
 
     // Apply perspective projection
     float perspective = 1.0 / (1.0 - transformedCoord.z * 0.5);
-    transformedCoord.xy *= perspective;		
+    transformedCoord.xy *= perspective;
 	vTexCoord *= perspective;
 	vFragPerspective = perspective;
-	
+
     // Transform back to screen coordinates
-    vec2 screenPosition = transformedCoord.xy + vec2(0.5, 0.5);	
-    VERTEX = screenPosition / TEXTURE_PIXEL_SIZE;	    
+    vec2 screenPosition = (transformedCoord.xy + vec2(0.5)) / TEXTURE_PIXEL_SIZE;
+    VERTEX = screenPosition;
 }
 
 void fragment() {
 	//perspective correction of UV
-    vec2 finalTexCoord = vTexCoord / vFragPerspective;	
-    vec4 texColor = texture(TEXTURE, finalTexCoord);	    
-	
-	//sepcular light
-	float colvalue = pow(clamp(1.0 - length(finalTexCoord - 0.5 + vMouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;
-	vec3 specularCol = vec3(colvalue, colvalue, colvalue);
-    
-	if(_isSpecularLight)   
+    vec2 finalTexCoord = vTexCoord / vFragPerspective;
+    vec4 texColor = texture(TEXTURE, finalTexCoord);
+
+	//specular light
+	float specularvalue = pow(clamp(1.0 - length(finalTexCoord - 0.5 + vMouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;
+	vec3 specularCol = vec3(specularvalue);
+
+	if(_isSpecularLight)
     	COLOR = texColor + vec4(specularCol, 0.0);
 	else
 		COLOR = texColor;
