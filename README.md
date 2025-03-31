@@ -12,3 +12,6 @@ Shader Properties:
 - Mouse Pos - This is the mouse position that will be set via GDScript attached to the canvas item.
 
 It is recommended to use a texture with some transparent space at the borders so that the image is not clipped when tilted.
+
+## Tutorial
+Learn here [how the shader works](https://knowercoder.itch.io/3d-hover-shader-godot/devlog/913870/3d-hover-shader-for-godot-make-your-ui-elements-pop)
