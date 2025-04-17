@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://csg0n6d7u0rvf"]
+[gd_scene load_steps=7 format=3 uid="uid://csg0n6d7u0rvf"]
 
 [ext_resource type="Texture2D" uid="uid://bj51tovyuhql7" path="res://Sprites/BirthdayCard_500x500.png" id="1_5o2q8"]
 [ext_resource type="Material" uid="uid://h3h86yy12dsj" path="res://Shaders/Hover3D_Material1.tres" id="1_ing62"]
@@ -6,27 +6,52 @@
 [ext_resource type="Material" uid="uid://bh2i1yoj5octm" path="res://Shaders/Hover3D_Material2.tres" id="4_h5ghc"]
 [ext_resource type="Texture2D" uid="uid://cmd4us3v3mj73" path="res://Sprites/BirthdayCard_250x200.png" id="5_iw7s8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_077hx"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.974469, 0.523311, 0.5145, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Node2D" type="Node2D"]
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
+offset_left = 114.0
+offset_top = 58.0
+offset_right = 1028.0
+offset_bottom = 588.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_077hx")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
 material = ExtResource("1_ing62")
-offset_left = 174.0
-offset_top = 61.0
-offset_right = 674.0
-offset_bottom = 561.0
+layout_mode = 0
+offset_left = 237.0
+offset_top = 37.0
+offset_right = 737.0
+offset_bottom = 537.0
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("1_5o2q8")
+expand_mode = 1
 script = ExtResource("2_a3wo0")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="Panel"]
 material = ExtResource("4_h5ghc")
-offset_left = 739.0
-offset_top = 222.0
-offset_right = 989.0
-offset_bottom = 422.0
+layout_mode = 0
+offset_left = 672.0
+offset_top = 172.0
+offset_right = 922.0
+offset_bottom = 372.0
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("5_iw7s8")
+expand_mode = 1
 script = ExtResource("2_a3wo0")
 
-[connection signal="mouse_entered" from="TextureRect" to="TextureRect" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="TextureRect" to="TextureRect" method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="TextureRect2" to="TextureRect2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="TextureRect2" to="TextureRect2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Panel/TextureRect" to="Panel/TextureRect" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/TextureRect" to="Panel/TextureRect" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Panel/TextureRect2" to="Panel/TextureRect2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/TextureRect2" to="Panel/TextureRect2" method="_on_mouse_exited"]
