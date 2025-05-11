@@ -102,22 +102,21 @@ void fragment() {
 	vec2 uv = transformUV(vec3(centeredCoord, 0.), rotation, UV);
 	uv = uv * (2. - _texPos.zw) - _texPos.xy;
 	
-	vec2 uv2 = transformUV(vec3(centeredCoord, _zDist2), rotation, UV);
-	uv2 = uv2 * (2. - _texPos2.zw) - _texPos2.xy;
-	
 	if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)
 		discard;
+	
+	vec2 uv2 = transformUV(vec3(centeredCoord, _zDist2), rotation, UV);
+	uv2 = uv2 * (2. - _texPos2.zw) - _texPos2.xy;	
 	
     vec4 texCol = texture(TEXTURE, uv);
 	vec4 secondTexCol = texture(_secondTex, uv2);
 	vec4 finalCol = mix(texCol, secondTexCol, secondTexCol.a);
+	finalCol = _isSecondTex ? finalCol : texCol;
 
 	//specular light
 	float specularvalue = pow(clamp(1.0 - length(uv - 0.5 + mouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;
 	vec3 specularCol = vec3(specularvalue);
 
-	if(_isSpecularLight)
-    	COLOR = finalCol + vec4(specularCol, 0.0);
-	else
-		COLOR = finalCol;
+	COLOR = _isSpecularLight ? finalCol + vec4(specularCol, 0.0) : finalCol;
+
 }
