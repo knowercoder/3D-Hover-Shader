@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://def4e6d5lsjhn"]
+
+[ext_resource type="Shader" uid="uid://co75u220wy41s" path="res://Shaders/Hover3D_Advanced.gdshader" id="1_s4yul"]
+[ext_resource type="Texture2D" uid="uid://b3rt7br5cal7f" path="res://Sprites/button.png" id="2_s4yul"]
+
+[resource]
+shader = ExtResource("1_s4yul")
+shader_parameter/_tilt_Scale = 0.25
+shader_parameter/_texPos = Vector4(0.1, 0.1, 0.8, 0.8)
+shader_parameter/_isSpecularLight = true
+shader_parameter/_speularLightIntensity = 0.5
+shader_parameter/_speularLightPower = 3.0
+shader_parameter/_isSecondTex = false
+shader_parameter/_secondTex = ExtResource("2_s4yul")
+shader_parameter/_texPos2 = Vector4(0.165, 0.98, 0.655, -0.065)
+shader_parameter/_zDist2 = 0.05
+shader_parameter/_mousePos = Vector2(0, 0)

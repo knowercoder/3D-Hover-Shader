@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="3D Hover Shader"
-run/main_scene="res://Scenes/Hover3D.tscn"
+run/main_scene="uid://b8g0ixpuh7c6s"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
