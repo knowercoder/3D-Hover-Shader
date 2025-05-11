@@ -39,6 +39,10 @@ group_uniforms others;
 uniform vec2 _mousePos;
 group_uniforms;
 
+bool IsOutofBounds(vec2 uv){
+	return uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0;
+}
+
 mat3 rotateMatrix(float xAngle, float yAngle, float zAngle){
 	// Rotation matrices around the X, Y, and Z axes
 
@@ -100,16 +104,16 @@ void fragment() {
 	mat3 rotation = rotateMatrix(tiltAngleX, tiltAngleY, tiltAngleZ);
 	
 	vec2 uv = transformUV(vec3(centeredCoord, 0.), rotation, UV);
-	uv = uv * (2. - _texPos.zw) - _texPos.xy;
-	
-	if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)
-		discard;
+	uv = uv * (2. - _texPos.zw) - _texPos.xy;	
 	
 	vec2 uv2 = transformUV(vec3(centeredCoord, _zDist2), rotation, UV);
-	uv2 = uv2 * (2. - _texPos2.zw) - _texPos2.xy;	
+	uv2 = uv2 * (2. - _texPos2.zw) - _texPos2.xy;
 	
     vec4 texCol = texture(TEXTURE, uv);
 	vec4 secondTexCol = texture(_secondTex, uv2);
+	
+	texCol.a = IsOutofBounds(uv) ? 0. : texCol.a;
+	secondTexCol.a = IsOutofBounds(uv2) ? 0. : secondTexCol.a;
 	vec4 finalCol = mix(texCol, secondTexCol, secondTexCol.a);
 	finalCol = _isSecondTex ? finalCol : texCol;
 
