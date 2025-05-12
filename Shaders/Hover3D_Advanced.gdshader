@@ -10,18 +10,12 @@ uniform vec4 _texPos = vec4(0, 0, 1, 1);
 group_uniforms;
 
 group_uniforms specular_highlight;
-/**
-* enable specular light
-*/
 uniform bool _isSpecularLight = false;
 uniform float _speularLightIntensity = 0.5;
 uniform float _speularLightPower = 3.0;
 group_uniforms;
 
 group_uniforms secondary_ui;
-/**
-* enable scond texture
-*/
 uniform bool _isSecondTex;
 uniform sampler2D _secondTex : source_color, repeat_disable;
 /**
@@ -29,6 +23,9 @@ uniform sampler2D _secondTex : source_color, repeat_disable;
 * X, Y = postion ((0, 0)start pos at top left) // z, w = width and height
 */
 uniform vec4 _texPos2 = vec4(0, 0, 1, 1);
+/**
+* depth
+*/
 uniform float _zDist2 = 0;
 group_uniforms;
 
@@ -93,7 +90,7 @@ void vertex() {
 
 void fragment() {
 	// Center the coordinates around the origin
- 	vec2 centeredCoord = UV - vec2(0.5);	
+	vec2 centeredCoord = UV - vec2(0.5);	
 	vec2 mouse_centered = ((_mousePos + 0.5/TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE) * 2.0 - 1.0;	
 	vec2 mouseoffset = mouse_centered / 2.0;
 	

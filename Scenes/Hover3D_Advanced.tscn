@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8g0ixpuh7c6s"]
+[gd_scene load_steps=7 format=3 uid="uid://b8g0ixpuh7c6s"]
 
-[ext_resource type="Material" uid="uid://def4e6d5lsjhn" path="res://Materials/Hover3D_Advanced_M1.tres" id="1_mwl0d"]
+[ext_resource type="Shader" uid="uid://co75u220wy41s" path="res://Shaders/Hover3D_Advanced.gdshader" id="1_i5sfs"]
 [ext_resource type="Texture2D" uid="uid://dd1a4k6twht15" path="res://Sprites/BirthdayCard.png" id="2_mwl0d"]
+[ext_resource type="Texture2D" uid="uid://71k0yynaonjv" path="res://Sprites/button.png" id="2_yae86"]
 [ext_resource type="Script" uid="uid://0sj48v4o0iyw" path="res://Scripts/Hover3D.gd" id="3_igksg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_077hx"]
@@ -16,6 +17,19 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igksg"]
+shader = ExtResource("1_i5sfs")
+shader_parameter/_tilt_Scale = 0.3
+shader_parameter/_texPos = Vector4(0.1, 0.1, 0.8, 0.8)
+shader_parameter/_isSpecularLight = true
+shader_parameter/_speularLightIntensity = 0.5
+shader_parameter/_speularLightPower = 3.0
+shader_parameter/_isSecondTex = true
+shader_parameter/_secondTex = ExtResource("2_yae86")
+shader_parameter/_texPos2 = Vector4(0.16, 3.19, 0.655, -3.3)
+shader_parameter/_zDist2 = 0.06
+shader_parameter/_mousePos = Vector2(0, 0)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Panel" type="Panel" parent="."]
@@ -26,7 +40,7 @@ offset_bottom = 588.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_077hx")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
-material = ExtResource("1_mwl0d")
+material = SubResource("ShaderMaterial_igksg")
 layout_mode = 0
 offset_left = 302.0
 offset_top = 53.0
@@ -34,7 +48,6 @@ offset_right = 602.0
 offset_bottom = 477.0
 texture = ExtResource("2_mwl0d")
 expand_mode = 1
-stretch_mode = 1
 script = ExtResource("3_igksg")
 
 [connection signal="mouse_entered" from="Panel/TextureRect" to="Panel/TextureRect" method="_on_mouse_entered"]
