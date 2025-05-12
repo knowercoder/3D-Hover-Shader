@@ -11,7 +11,8 @@ Note:
 
 The “Mouse Pos” uniform is the mouse position that will be set via Hover3D gdScript attached to the canvasitem.
 
-![Hover3D](https://github.com/user-attachments/assets/cd534e7f-4108-4a87-82b5-60f5eed608af)
+![Hover3dv2](https://github.com/user-attachments/assets/7e12b7ea-8acf-411a-91bd-aa93bddceb8e)
+
 
 
 ## Tutorial
