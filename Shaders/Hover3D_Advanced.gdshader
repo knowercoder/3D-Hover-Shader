@@ -2,22 +2,19 @@ shader_type canvas_item;
 
 group_uniforms hover;
 uniform float _tilt_Scale = 0.25;
+uniform vec4 _mainTint : source_color = vec4(1, 1, 1, 1);
 /**
 * secondary texture position, width and height
 * X, Y = postion ((0, 0)start pos at top left) // z, w = width and height
 */
 uniform vec4 _texPos = vec4(0, 0, 1, 1);
-group_uniforms;
-
-group_uniforms specular_highlight;
-uniform bool _isSpecularLight = false;
-uniform float _speularLightIntensity = 0.5;
-uniform float _speularLightPower = 3.0;
+uniform float _zDist : hint_range(0., 0.1) = 0;
 group_uniforms;
 
 group_uniforms secondary_ui;
 uniform bool _isSecondTex;
 uniform sampler2D _secondTex : source_color, repeat_disable;
+uniform vec4 _secondTint : source_color = vec4(1, 1, 1, 1);
 /**
 * secondary texture position, width and height
 * X, Y = postion ((0, 0)start pos at top left) // z, w = width and height
@@ -26,7 +23,13 @@ uniform vec4 _texPos2 = vec4(0, 0, 1, 1);
 /**
 * depth
 */
-uniform float _zDist2 = 0;
+uniform float _zDist2 : hint_range(0., 0.1) = 0;
+group_uniforms;
+
+group_uniforms specular_highlight;
+uniform bool _isSpecularLight = false;
+uniform float _speularLightIntensity = 0.5;
+uniform float _speularLightPower = 3.0;
 group_uniforms;
 
 group_uniforms others;
@@ -76,7 +79,7 @@ vec2 transformUV(vec3 centeredCoord, mat3 rotation, vec2 uvcoord){
     vec3 transformedUV = rotation * centeredCoord;
     //Apply perspective projection
     float perspective = 1.0 / (1.0 - transformedUV.z * 0.5);
-    transformedUV.xy *= perspective;	
+    transformedUV.xy *= perspective;
 	//back to screen coord
 	vec2 uv = transformedUV.xy + vec2(0.5);
 	//perspective inversion for texture sampling
@@ -90,29 +93,30 @@ void vertex() {
 
 void fragment() {
 	// Center the coordinates around the origin
-	vec2 centeredCoord = UV - vec2(0.5);	
-	vec2 mouse_centered = ((_mousePos + 0.5/TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE) * 2.0 - 1.0;	
+	vec2 centeredCoord = UV - vec2(0.5);
+	vec2 mouse_centered = ((_mousePos + 0.5/TEXTURE_PIXEL_SIZE) * TEXTURE_PIXEL_SIZE) * 2.0 - 1.0;
 	vec2 mouseoffset = mouse_centered / 2.0;
-	
+
 	//rotation matrix
 	float tiltAngleX = mouse_centered.y * _tilt_Scale;
 	float tiltAngleY = -mouse_centered.x * _tilt_Scale;
 	float tiltAngleZ = 0.; //no rotation along Z-axis, so the angle is zero
 	mat3 rotation = rotateMatrix(tiltAngleX, tiltAngleY, tiltAngleZ);
-	
-	vec2 uv = transformUV(vec3(centeredCoord, 0.), rotation, UV);
-	uv = uv * (2. - _texPos.zw) - _texPos.xy;	
-	
-	vec2 uv2 = transformUV(vec3(centeredCoord, _zDist2), rotation, UV);
-	uv2 = uv2 * (2. - _texPos2.zw) - _texPos2.xy;
-	
-    vec4 texCol = texture(TEXTURE, uv);
-	vec4 secondTexCol = texture(_secondTex, uv2);
-	
+
+	vec2 uv = transformUV(vec3(centeredCoord, _zDist), rotation, UV);
+	uv = (uv - _texPos.xy) / _texPos.zw;
+	vec4 texCol = texture(TEXTURE, uv) * _mainTint;
 	texCol.a = IsOutofBounds(uv) ? 0. : texCol.a;
-	secondTexCol.a = IsOutofBounds(uv2) ? 0. : secondTexCol.a;
+
+	vec4 secondTexCol = vec4(0.0);
+	if(_isSecondTex){
+		vec2 uv2 = transformUV(vec3(centeredCoord, _zDist + _zDist2), rotation, UV);
+		uv2 = (uv2 - _texPos2.xy) / _texPos2.zw;
+		secondTexCol = texture(_secondTex, uv2) * _secondTint;
+		secondTexCol.a = IsOutofBounds(uv2) ? 0. : secondTexCol.a;
+	}
+	
 	vec4 finalCol = mix(texCol, secondTexCol, secondTexCol.a);
-	finalCol = _isSecondTex ? finalCol : texCol;
 
 	//specular light
 	float specularvalue = pow(clamp(1.0 - length(uv - 0.5 + mouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;

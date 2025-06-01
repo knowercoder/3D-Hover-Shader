@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://0sj48v4o0iyw" path="res://Scripts/Hover3D.gd" id="3_igksg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_077hx"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.129412, 0.294118, 0.396078, 1)
 border_width_left = 7
 border_width_top = 7
 border_width_right = 7
@@ -20,32 +20,36 @@ corner_radius_bottom_left = 20
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_igksg"]
 shader = ExtResource("1_i5sfs")
 shader_parameter/_tilt_Scale = 0.3
+shader_parameter/_mainTint = Color(1, 1, 1, 1)
 shader_parameter/_texPos = Vector4(0.1, 0.1, 0.8, 0.8)
-shader_parameter/_isSpecularLight = true
-shader_parameter/_speularLightIntensity = 0.5
-shader_parameter/_speularLightPower = 3.0
+shader_parameter/_zDist = 0.0
 shader_parameter/_isSecondTex = true
 shader_parameter/_secondTex = ExtResource("2_yae86")
-shader_parameter/_texPos2 = Vector4(0.16, 3.19, 0.655, -3.3)
+shader_parameter/_secondTint = Color(1, 1, 1, 1)
+shader_parameter/_texPos2 = Vector4(0.15, 0.63, 0.68, 0.17)
 shader_parameter/_zDist2 = 0.06
+shader_parameter/_isSpecularLight = true
+shader_parameter/_speularLightIntensity = 0.3
+shader_parameter/_speularLightPower = 3.0
 shader_parameter/_mousePos = Vector2(0, 0)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 114.0
-offset_top = 58.0
-offset_right = 1028.0
-offset_bottom = 588.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 1149.0
+offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_077hx")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 material = SubResource("ShaderMaterial_igksg")
 layout_mode = 0
-offset_left = 302.0
-offset_top = 53.0
-offset_right = 602.0
-offset_bottom = 477.0
+offset_left = 385.0
+offset_top = 68.0
+offset_right = 685.0
+offset_bottom = 492.0
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_mwl0d")
 expand_mode = 1
 script = ExtResource("3_igksg")
