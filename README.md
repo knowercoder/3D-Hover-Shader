@@ -1,16 +1,19 @@
 # 3D-Hover-Shader
-This shader will create a 3D hovering effect with mouse interaction on a canvas item like TextureRect. Also, it renders a specular highlight that changes with hover.
+This shader creates a 3D hovering effect with mouse interaction on a canvasitem like TextureRect, in Godot game engine.
 
-![Hover3D](https://github.com/user-attachments/assets/8e22a6b9-e204-44ce-97ba-66f7e352bc80)
+Features:
 
+- 3D tilting on mouse hover
+- Specular highlight that changes with hover.
+- A second texture, laid on top, with adjustable depth
 
-Shader Properties:
-- Tilt Scale - Amount of tilt on mouse hover
-- Is Specular Light - Enable/disable specular highlight
-- Specular Light Intensity - specular highlight strength
-- Specular Light Power - controls the spread of specular highlight
-- Mouse Pos - This is the mouse position that will be set via GDScript attached to the canvas item.
+Note:
+
+The “Mouse Pos” uniform is the mouse position that will be set via Hover3D gdScript attached to the canvasitem.
+
+![Hover3dv2](https://github.com/user-attachments/assets/7e12b7ea-8acf-411a-91bd-aa93bddceb8e)
+
 
 
 ## Tutorial
-Learn here [how the shader works](https://knowercoder.itch.io/3d-hover-shader-godot/devlog/913870/3d-hover-shader-for-godot-make-your-ui-elements-pop)
+Learn here [how the basic shader code works](https://knowercoder.itch.io/3d-hover-shader-godot/devlog/913870/3d-hover-shader-for-godot-make-your-ui-elements-pop)
