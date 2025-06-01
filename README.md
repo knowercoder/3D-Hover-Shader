@@ -16,5 +16,5 @@ The “Mouse Pos” uniform is the mouse position that will be set via Hover3D g
 ### Tutorial
 Learn here [how the basic shader code works](https://knowercoder.itch.io/3d-hover-shader-godot/devlog/913870/3d-hover-shader-for-godot-make-your-ui-elements-pop)
 
-### 3D Hover Pro
+### 3D Hover Shader Pro
 Like this shader?  [The Pro version](https://knowercoder.itch.io/3d-hover-shader-pro) adds even more features – take a look!
