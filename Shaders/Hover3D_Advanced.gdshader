@@ -1,3 +1,6 @@
+//3D hover - pro
+//Attach the "Hover3D_pro.gd" script to your canvas item
+
 shader_type canvas_item;
 
 group_uniforms hover;
@@ -26,9 +29,22 @@ uniform vec4 _texPos2 = vec4(0, 0, 1, 1);
 uniform float _zDist2 : hint_range(0., 0.1) = 0;
 group_uniforms;
 
+group_uniforms shadows;
+uniform bool _isShadows = true;
+/**
+* shadow offset for main tex
+*/
+uniform vec2 _shadowOffset;
+/**
+* shadow offset for second tex
+*/
+uniform vec2 _shadowOffset2;
+uniform vec4 _shadowCol : source_color = vec4(0, 0, 0, 0.5);
+group_uniforms;
+
 group_uniforms specular_highlight;
 uniform bool _isSpecularLight = false;
-uniform float _speularLightIntensity = 0.5;
+uniform float _speularLightIntensity = 0.3;
 uniform float _speularLightPower = 3.0;
 group_uniforms;
 
@@ -115,8 +131,33 @@ void fragment() {
 		secondTexCol = texture(_secondTex, uv2) * _secondTint;
 		secondTexCol.a = IsOutofBounds(uv2) ? 0. : secondTexCol.a;
 	}
-	
-	vec4 finalCol = mix(texCol, secondTexCol, secondTexCol.a);
+
+	vec4 shadowCol1 = vec4(0.0);
+	vec4 shadowCol2 = vec4(0.0);
+	if(_isShadows){
+		vec2 shadowUv1 = transformUV(vec3(centeredCoord - _shadowOffset.xy, _zDist), rotation, UV);
+		vec2 shadowUv2 = transformUV(vec3(centeredCoord - _shadowOffset2.xy, _zDist + _zDist2), rotation, UV);
+
+		shadowUv1 = (shadowUv1 - _texPos.xy) / _texPos.zw;
+		shadowUv1 -= vec2(tiltAngleY, -tiltAngleX) * 0.1;
+		shadowCol1 = texture(TEXTURE, shadowUv1) * _shadowCol;
+		shadowCol1.a = IsOutofBounds(shadowUv1) ? 0. : shadowCol1.a;
+
+		if(_isSecondTex){
+			vec2 shadowUv2 = (shadowUv2 - _texPos2.xy) / _texPos2.zw;
+			shadowUv2 -= vec2(tiltAngleY, -tiltAngleX) * 0.1;
+			shadowCol2 = texture(_secondTex, shadowUv2) * _shadowCol;
+			shadowCol2.a = IsOutofBounds(shadowUv2) ? 0. : shadowCol2.a;
+		}
+	}
+
+	//main color with shadow
+	vec4 mainCol = mix(shadowCol1, texCol, texCol.a);
+
+	//second color with shadow
+	vec4 secondCol = mix(shadowCol2, secondTexCol, secondTexCol.a);
+
+	vec4 finalCol = mix(mainCol, secondCol, secondCol.a);
 
 	//specular light
 	float specularvalue = pow(clamp(1.0 - length(uv - 0.5 + mouseoffset), 0.0, 1.0), _speularLightPower) * _speularLightIntensity;

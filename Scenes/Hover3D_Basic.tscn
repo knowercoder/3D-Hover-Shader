@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://o22b6o4dqekk" path="res://Shaders/Hover3D_Basic.gdshader" id="1_1xc6x"]
 [ext_resource type="Texture2D" uid="uid://dd1a4k6twht15" path="res://Sprites/BirthdayCard.png" id="2_1xc6x"]
-[ext_resource type="Script" uid="uid://0sj48v4o0iyw" path="res://Scripts/Hover3D.gd" id="2_a3wo0"]
+[ext_resource type="Script" uid="uid://0sj48v4o0iyw" path="res://Scripts/Hover3D_Basic.gd" id="2_a3wo0"]
 [ext_resource type="Texture2D" uid="uid://cmd4us3v3mj73" path="res://Sprites/BirthdayCard_250x200.png" id="5_iw7s8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_077hx"]

@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://co75u220wy41s" path="res://Shaders/Hover3D_Advanced.gdshader" id="1_i5sfs"]
 [ext_resource type="Texture2D" uid="uid://dd1a4k6twht15" path="res://Sprites/BirthdayCard.png" id="2_mwl0d"]
 [ext_resource type="Texture2D" uid="uid://71k0yynaonjv" path="res://Sprites/button.png" id="2_yae86"]
-[ext_resource type="Script" uid="uid://0sj48v4o0iyw" path="res://Scripts/Hover3D.gd" id="3_igksg"]
+[ext_resource type="Script" uid="uid://cnrn6nvtwnwiv" path="res://Scripts/Hover3D_Advanced.gd" id="4_i5sfs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_077hx"]
 bg_color = Color(0.129412, 0.294118, 0.396078, 1)
@@ -28,6 +28,10 @@ shader_parameter/_secondTex = ExtResource("2_yae86")
 shader_parameter/_secondTint = Color(1, 1, 1, 1)
 shader_parameter/_texPos2 = Vector4(0.15, 0.63, 0.68, 0.17)
 shader_parameter/_zDist2 = 0.06
+shader_parameter/_isShadows = true
+shader_parameter/_shadowOffset = Vector2(0.02, -0.02)
+shader_parameter/_shadowOffset2 = Vector2(0.02, -0.02)
+shader_parameter/_shadowCol = Color(0, 0, 0, 0.5)
 shader_parameter/_isSpecularLight = true
 shader_parameter/_speularLightIntensity = 0.3
 shader_parameter/_speularLightPower = 3.0
@@ -52,7 +56,7 @@ offset_bottom = 492.0
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_mwl0d")
 expand_mode = 1
-script = ExtResource("3_igksg")
+script = ExtResource("4_i5sfs")
 
 [connection signal="mouse_entered" from="Panel/TextureRect" to="Panel/TextureRect" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Panel/TextureRect" to="Panel/TextureRect" method="_on_mouse_exited"]
